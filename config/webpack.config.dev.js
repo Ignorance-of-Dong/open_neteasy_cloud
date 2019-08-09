@@ -1,3 +1,10 @@
+/*
+ * @Author: Mr.zheng
+ * @Date: 2019-08-09 13:46:11
+ * @LastEditors: OBKoro1
+ * @LastEditTime: 2019-08-09 16:56:00
+ * @Description: 
+ */
 const path = require('path')
 const merge = require('webpack-merge')
 const webpackCommon = require('./webpack.config.common')
@@ -21,10 +28,14 @@ module.exports = merge(webpackCommon, {
 		compress: true,
 		quiet: true, // 清除webpack
 		historyApiFallback: true, // 该选项的作用所有的404都连接到index.html
-		// proxy: {
-		//   // 代理到后端的服务地址，会拦截所有以api开头的请求地址
-		//   "/api": "http://localhost:4000"
-		// }
+		proxy: {
+		  // 代理到后端的服务地址，会拦截所有以api开头的请求地址
+		  "/": {
+				target: "http://musicapi.ignorantscholar.cn/",
+				pathRewrite: { '^/': '/' },
+        changeOrigin: true
+			}
+		}
 	},
 	plugins: [
 		new ProgressBarPlugin({
