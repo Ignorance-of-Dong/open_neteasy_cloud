@@ -10,6 +10,11 @@ import React from 'react'
 export default {
     config: [
         {
+            path: "/home",
+            component: React.lazy(() => import('../views/Home')),
+            exact: true
+        },
+        {
             path: "/login",
             component: React.lazy(() => import('../views/Login')),
             exact: true

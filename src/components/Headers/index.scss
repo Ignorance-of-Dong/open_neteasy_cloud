@@ -1,0 +1,7 @@
+@import 'src/assets/style/px2rem.scss';
+
+.header-bar {
+    width: 100%;
+    height: px2rem(40);
+    border-bottom: px2rem(1) solid #ccc;
+}
