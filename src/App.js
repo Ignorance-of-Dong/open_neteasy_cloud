@@ -1,6 +1,7 @@
 import React, { Suspense } from 'react';
 import { HashRouter, Switch, Route, Redirect } from 'react-router-dom'
-import routerConfig from './router/index'
+import './App.css'
+import routerConfig from './router'
 import Wrong from './views/Wrong'//404页面
 
 export default () => {
@@ -8,7 +9,7 @@ export default () => {
     return <HashRouter>
         <Suspense fallback={<div></div>}>
             <Switch>
-                <Redirect exact from='/' to="/login" />
+                <Redirect exact from='/' to="/home" />
                 {
                     routerConfig.config.map((item, ind) => {
 

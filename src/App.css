@@ -1,4 +1,4 @@
-@import 'src/assets/style/px2rem.scss';
+@import './assets/style/px2rem.scss';
 
 * {
     -webkit-appearance: none;
