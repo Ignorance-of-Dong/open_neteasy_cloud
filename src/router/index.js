@@ -6,8 +6,6 @@
  * @Description: 
  */
 import React from 'react'
-import Home from '../views/Home/index'
-console.log(Home, '============Home')
 export default {
     config: [
         {

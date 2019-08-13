@@ -1,10 +1,15 @@
 import React from 'react'
 import './index.scss'
-function Headers() {
+function Headers(props) {
     return (
         <>
             <div className="header-bar">
-                11111
+                <div className="back-header">
+                    《
+                </div>
+                <div className="text-header">
+                    手机号登陆
+                </div>
             </div>
         </>
     )

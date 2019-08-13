@@ -2,6 +2,17 @@
 
 .header-bar {
     width: 100%;
-    height: px2rem(40);
+    height: px2rem(100);
     border-bottom: px2rem(1) solid #ccc;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    box-sizing: border-box;
+    padding: px2rem(20);
+    .back-header{
+        margin-right: px2rem(20);
+    }
+    .text-header{
+        font-size: px2rem(35);
+    }
 }
