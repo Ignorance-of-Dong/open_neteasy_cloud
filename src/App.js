@@ -2,7 +2,7 @@ import React, { Suspense } from 'react';
 import { HashRouter, Switch, Route, Redirect } from 'react-router-dom'
 import './App.css'
 import routerConfig from './router'
-import Wrong from './views/Wrong'//404页面
+import Wrong from './views/PgWrong'//404页面
 
 export default () => {
 

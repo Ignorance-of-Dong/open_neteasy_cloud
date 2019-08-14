@@ -10,17 +10,22 @@ export default {
     config: [
         {
             path: "/home",
-            component: React.lazy(() => import('../views/Home')),
+            component: React.lazy(() => import('../views/PgHome')),
             exact: true
         },
         {
-            path: "/login",
-            component: React.lazy(() => import('../views/Login')),
+            path: "/loginphone",
+            component: React.lazy(() => import('../views/PgLogin/PgPhoneInput')),
+            exact: true
+        },
+        {
+            path: "/loginpassword",
+            component: React.lazy(() => import('../views/PgLogin/PgPasswordInput')),
             exact: true
         },
         {
             path: "/wrong",
-            component: React.lazy(() => import('../views/Wrong')),
+            component: React.lazy(() => import('../views/PgWrong')),
             exact: true
         },
     ]
