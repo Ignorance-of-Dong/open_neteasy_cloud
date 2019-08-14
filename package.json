@@ -1,6 +1,6 @@
 {
-  "name": "my",
-  "version": "0.1.0",
+  "name": "open_neteasy_cloud",
+  "version": "1.0.0",
   "private": true,
   "dependencies": {
     "@types/node": "^12.7.1",

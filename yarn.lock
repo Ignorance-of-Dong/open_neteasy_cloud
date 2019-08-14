@@ -1200,7 +1200,7 @@
 
 "@types/react@*", "@types/react@^16.9.1":
   version "16.9.1"
-  resolved "https://registry.npm.taobao.org/@types/react/download/@types/react-16.9.1.tgz#862c83b4c9d5cd116e42fd9a4f3694843cd2c051"
+  resolved "https://registry.npm.taobao.org/@types/react/download/@types/react-16.9.1.tgz?cache=0&sync_timestamp=1565360527564&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40types%2Freact%2Fdownload%2F%40types%2Freact-16.9.1.tgz#862c83b4c9d5cd116e42fd9a4f3694843cd2c051"
   integrity sha1-hiyDtMnVzRFuQv2aTzaUhDzSwFE=
   dependencies:
     "@types/prop-types" "*"
