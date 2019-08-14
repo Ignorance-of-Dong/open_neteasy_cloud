@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 // import { login } from '../../api/index.js'
 import Headers from '../../../components/Headers'
 import './index.scss'
-function PgPasswordInput(props) {
+function PgPasswordInput(props: any) {
     useEffect(() => {
         console.log(props.Hash)
     })

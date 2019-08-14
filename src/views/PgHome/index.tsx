@@ -1,7 +1,7 @@
 import React from 'react'
 import './index.scss'
 
-function Home(props) {
+function Home(props:any) {
     return (
         <>
         {console.log(props)

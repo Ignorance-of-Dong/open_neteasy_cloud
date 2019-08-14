@@ -25,7 +25,7 @@ let fetchs = {
              url += '&' + paramsArray.join('&')
          }
      }
-     var fetchConfig = {
+     let fetchConfig: any = {
          method: 'get',
          headers: {
            authorization: window.sessionStorage.getItem('token') ? window.sessionStorage.getItem('token') : null,

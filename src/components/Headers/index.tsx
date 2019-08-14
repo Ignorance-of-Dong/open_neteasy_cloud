@@ -1,6 +1,6 @@
 import React from 'react'
 import './index.scss'
-function Headers(props) {
+function Headers(props: any) {
     return (
         <>
             <div className="header-bar">

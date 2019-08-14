@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 // import { login } from '../../api/index.js'
 import Headers from '../../../components/Headers'
 import './index.scss'
-function PgPhoneInput(props) {
+function PgPhoneInput(props: any) {
     let [phone, setphone] = useState('')
     useEffect(() => {
         console.log(1111, '=======')
