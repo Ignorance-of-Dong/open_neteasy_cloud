@@ -9,7 +9,6 @@ import fetch from '../utils/fetch'
 // import axios from 'axios'
 
 function login(data: any) {
-  console.log(data)
   return fetch.post('/login/cellphone', data)
 }
 
