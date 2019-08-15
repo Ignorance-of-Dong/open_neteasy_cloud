@@ -6,7 +6,7 @@ const rewireStyledComponents = require('react-app-rewire-styled-components');
 const path = require('path');
 
 module.exports = function override(config, env) {
-    // console.log(config)
+    console.log(config)
     // config = fixBabelImports('import', {
     //     libraryName: 'antd',
     //     libraryDirectory: 'es',
@@ -23,9 +23,9 @@ module.exports = function override(config, env) {
     });
     config = rewireReactHotLoader(config, env);
     config = addWebpackAlias({
-        ['utils']: path.resolve(__dirname, 'src', 'utils'),
-        ['src']: path.resolve(__dirname, 'src'),
-        ['themed-components']: path.resolve(__dirname, 'src', 'utils', 'themed-components')
+        'utils': path.resolve(__dirname, 'src', 'utils'),
+        'src': path.resolve(__dirname, 'src'),
+        // ['themed-components']: path.resolve(__dirname, 'src', 'utils', 'themed-components')
     })(config);
     config = rewireStyledComponents(config, env, {
         pure: true,
