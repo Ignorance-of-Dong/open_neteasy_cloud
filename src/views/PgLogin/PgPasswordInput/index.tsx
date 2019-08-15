@@ -27,16 +27,13 @@ function PgPasswordInput(props: any) {
             <div className="password-wrap">
                 <div className="password-input">
                     <div className="password-border">
-                        <div className="password-prefix">
-                            密码
-                        </div>
                         <div className="password-text-wrap">
-                            <input type="password" className="password-text" value={password} onChange={(e) => {
+                            <input type="password"  placeholder='请输入密码' className="password-text" value={password} onChange={(e) => {
                                 setpassword(e.target.value)
                             }}/>
                         </div>
-                        <div className="password-close">
-                            x
+                        <div className="password-forget">
+                            忘记密码？
                         </div>
                     </div>
                 </div>

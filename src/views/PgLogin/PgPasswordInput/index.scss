@@ -2,6 +2,7 @@
 .password-wrap{
     width: 100%;
     height: px2rem(300);
+    margin-top:px2rem(100);
     // background: #ccc;
     .password-tips{
         width: 100%;
@@ -23,6 +24,11 @@
             justify-content: space-between;
             align-items: center;
         }
+    }
+    .password-forget{
+        // padding-right: px2rem(40);
+        font-size: px2rem(15);
+        color: cornflowerblue;
     }
     .password-text-wrap {
         flex:1;

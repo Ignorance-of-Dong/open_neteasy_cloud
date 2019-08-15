@@ -10,6 +10,8 @@
         position: absolute;
         left: 50%;
         top: 20%;
+        border-radius: 50%;
+        overflow: hidden;
         width: px2rem(48 * 3);
         height: px2rem(48 * 3);
         // margin-left: -px2rem(48 * 2);

@@ -1,12 +1,19 @@
 import React, { useEffect, useState } from 'react'
 // import { login } from '../../api/index.js'
-import Headers from '../../../components/Headers'
+import {Headers, Toast} from '../../../components'
 import './index.scss'
 function PgPhoneInput(props: any) {
     let [phone, setphone] = useState('')
     useEffect(() => {
         console.log(1111, '=======')
     }, [])
+    function toPassword() {
+        if (phone.length < 11) {
+            Toast('请输入11位数字的手机号', 2000)
+            return
+        }
+        props.history.push(`/loginpassword?phone=${phone}`)
+    }
     return (
         <>
             <Headers props={props}/>
@@ -30,11 +37,13 @@ function PgPhoneInput(props: any) {
                     </div>
                 </div>
                 <div className="phone-buttom" onClick={() => {
-                    props.history.push(`/loginpassword?phone=${phone}`)
+                    toPassword()
+                    
                 }}>
                     下一步
                 </div>
             </div>
+            
         </>
     )
 }
