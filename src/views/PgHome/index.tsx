@@ -4,8 +4,7 @@ import './index.scss'
 function Home(props:any) {
     return (
         <>
-        {console.log(props)
-        }
+        {console.log(props)}
             <div className='home-wrap'>
                 <div className="home-logo">
                     <img className='home-logo-wh' src={require('../../assets/images/logo.png')} alt=""/>
