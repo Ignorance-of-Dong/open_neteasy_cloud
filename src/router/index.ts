@@ -28,5 +28,10 @@ export default {
             component: React.lazy(() => import('../views/PgWrong')),
             exact: true
         },
+        {
+            path: "/index",
+            component: React.lazy(() => import('../views/PgIndex')),
+            exact: true
+        },
     ]
 }
