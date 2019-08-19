@@ -54,7 +54,7 @@
 .common-song-wrap {
     width: 100%;
     // height: px2rem(500);
-    background: #ccc;
+    // background: #ccc;
     margin-top:px2rem(20);
     .common-song-title {
         width: 100%;
@@ -96,7 +96,7 @@
                 width: px2rem(250);
                 height: px2rem(250);
                 background: lightblue;
-                border-radius: px2rem(20);
+                border-radius: px2rem(10);
                 overflow: hidden;
                 img {
                     width: 100%;
@@ -104,10 +104,13 @@
                 }
             }
             .recommended-song-text {
-                width: px2rem(250);
-                font-size: px2rem(30);
+                width: 100%;
+                font-size: px2rem(25);
+                padding-top:px2rem(10);
                 text-align: left;
                 color: #000;
+                word-break:break-all;
+                margin:0;
             }
         }
     }

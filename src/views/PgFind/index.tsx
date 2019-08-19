@@ -95,8 +95,8 @@ function PgFind() {
                 <Carousel
                     autoplay={true}
                     infinite
-                    beforeChange={(from, to) => console.log(`slide from ${from} to ${to}`)}
-                    afterChange={index => console.log('slide to', index)}
+                    beforeChange={() => {}}
+                    afterChange={() => {}}
                 >
                     {data.map(val => (
                         <span
@@ -164,11 +164,11 @@ function PgFind() {
                         {
                             c.map(item => {
                                 return (
-                                    <div className="recommended-song-tip">
+                                    <div className="recommended-song-tip" key={item.id}>
                                         <div className="recommended-song-price">
                                             <img src={item.picUrl} alt=""/>
                                         </div>
-                                        <div className='recommended-song-text small'>
+                                        <div className='recommended-song-text'>
                                             {item.name}
                                         </div>
                                     </div>
