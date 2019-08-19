@@ -31,7 +31,29 @@ export default {
         {
             path: "/index",
             component: React.lazy(() => import('../views/PgIndex')),
-            exact: true
+            exact: true,
+            children: [
+                {
+                    path: "/index/fined",
+                    component: React.lazy(() => import('../views/PgFind')),
+                    exact: false,
+                },
+                {
+                    path: "/index/my",
+                    component: React.lazy(() => import('../views/PgMy')),
+                    exact: false,
+                },
+                {
+                    path: "/index/firends",
+                    component: React.lazy(() => import('../views/PgFirends')),
+                    exact: false,
+                },
+                {
+                    path: "/index/vidio",
+                    component: React.lazy(() => import('../views/PgVidio')),
+                    exact: false,
+                }
+            ]
         },
     ]
 }

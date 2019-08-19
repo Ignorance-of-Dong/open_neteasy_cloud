@@ -1,103 +1,45 @@
-import { Drawer, List, NavBar, Icon } from 'antd-mobile';
-import React, { useState } from 'react'
-import {Icons} from '../../components'
+import { Drawer, NavBar, Icon } from 'antd-mobile';
+import React, { useState, useEffect } from 'react'
+// import {Icons} from '../../components'
+import RouterView from '../../router/routerView'
+import PgLeftSlider from '../PgLeftSlider'
 import './index.scss'
-function Index() {
-    let [open, setopen] = useState(true)
+function Index(props: any) {
+    let [heightlight, setheightlight] = useState(1)
+    let [open, setopen] = useState(false)
+    
     function onOpenChange(...args) {
         setopen(!open)
     }
-    const sidebar = (
-        <List className='left-slider-wraps'>
-            <div className="left-slider-topwrap">
-                <div className="left-slider-anuter">
-                    <img src="http://p1.music.126.net/0jS11D3OFnYBUpako_cLWA==/18547661650919676.jpg?param=140y140" alt=""/>
-                </div>
-                <p className='left-silder-name'>
-                    <span className='l-s-n-name'> 想上树的跳蚤 </span>
-                    <span className='l-s-n-sign'>签到</span>
-                </p>
-                <div className="left-slider-vip-wrap">
-                    <div className="l-v-left">
-                        <p className='v-i-p small'>开通黑胶VIP</p>
-                        <p className='small' style={{color:'#ccc'}}> 已过期</p>
-                        <i></i>
-                    </div>
-                    <div className="l-v-Advertisement small">
-                        披萨免费吃一年
-                    </div>
-                </div>
-                <div className="left-slider-tab-bar">
-                    <div className="l-s-t-b-coule">
-                        <Icons className='c-icon' un='&#xe60a;' />
-                        <p className='l-s-t-b-name small'>我的消息</p>
-                    </div>
-                    <div className="l-s-t-b-coule">
-                        <Icons className='c-icon' un='&#xe604;' />
-                        <p className='l-s-t-b-name small'>我的好友</p>
-                    </div>
+    let tabBars = [
+        {
+            title: '我的',
+            paths: '/index/my'
+        },
+        {
+            title: '发现',
+            paths: '/index/fined'
+        },
+        {
+            title: '朋友',
+            paths: '/index/firends'
+        },
+        {
+            title: '视频',
+            paths: '/index/vidio'
+        }
+    ]
+    // eslint 并不了解你的规则，应该在此处禁用eslint
+    /* eslint-disable */
+    useEffect(() => {
+        props.history.push(tabBars[heightlight].paths)
+    }, [heightlight])
 
-                    <div className="l-s-t-b-coule">
-                        <Icons className='c-icon' un='&#xe686;' />
-                        <p className='l-s-t-b-name small'>个性换肤</p>
-                    </div>
-                    <div className="l-s-t-b-coule">
-                        <Icons className='c-icon' un='&#xe600;' />
-                        <p className='l-s-t-b-name small'>听歌识曲</p>
-                    </div>
-                </div>
-                <div className="left-slider-demand-like">
-                    <div className="l-s-d-list  mT">
-                        <div className="l-s-d-l-left">
-                            <Icons className='l-icon' un='&#xe75e;' /> 
-                            <p className='small'>演出</p>
-                        </div>
-                        <div className="l-s-d-l-right bigsmall">
-                            萧金腾
-                        </div>
-                    </div>
-                    <div className="l-s-d-list">
-                        <div className="l-s-d-l-left">
-                            <Icons className='l-icon' un='&#xe619;' />
-                            <p className='small'>商城</p>
-                        </div>
-                        <div className="l-s-d-l-right bigsmall">
-                            皮卡丘伞39元
-                        </div>
-                    </div>
-                    <div className="l-s-d-list">
-                        <div className="l-s-d-l-left">
-                            <Icons className='l-icon' un='&#xe61d;' />
-                            <p className='small'>附近的人</p>
-                        </div>
-                        <div className="l-s-d-l-right bigsmall">
-                            听说你也在想我
-                        </div>
-                    </div>
-                    <div className="l-s-d-list">
-                        <div className="l-s-d-l-left">
-                            <Icons className='l-icon' un='&#xe717;' />
-                            <p className='small'>口袋铃声</p>
-                        </div>
-                        <div className="l-s-d-l-right bigsmall">
-
-                        </div>
-                    </div>
-                    <div className="l-s-d-list">
-                        <div className="l-s-d-l-left">
-                            <Icons className='l-icon' un='&#xe60b;' />
-                            <p className='small'>我的订单</p>
-                        </div>
-                        <div className="l-s-d-l-right bigsmall">
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-        </List>
-    );
-
+    function toTabable(path, index) {
+        setheightlight(index)
+        props.history.push(path)
+    }
+    const sidebar = (<PgLeftSlider/>)
     return (
         <>
             <div className='index-wraps'>
@@ -111,11 +53,15 @@ function Index() {
                     ]}
                     onLeftClick={onOpenChange}
                 >
-
-                    <div className='tab-index-bar'>我的</div>
-                    <div className='tab-index-bar'>发现</div>
-                    <div className='tab-index-bar'>朋友</div>
-                    <div className='tab-index-bar'>视频</div>
+                    {
+                        tabBars.map((item, index) => {
+                            return (
+                                <div className={heightlight === index ? 'tab-index-bar-actived' : 'tab-index-bar'} onClick={() => {
+                                    toTabable(item.paths, index)
+                                }} key={index}>{item.title}</div>
+                            )
+                        })
+                    }
                 </NavBar>
                 <Drawer
                     className="my-drawer"
@@ -126,7 +72,7 @@ function Index() {
                     open={open}
                     onOpenChange={onOpenChange}
                 >
-                    Click upper-left corner
+                    <RouterView routers={props.route}/>
                 </Drawer>
             </div>
         </>

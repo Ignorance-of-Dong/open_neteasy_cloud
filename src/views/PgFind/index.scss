@@ -1,0 +1,114 @@
+@import 'src/assets/style/px2rem.scss';
+.slider-list {
+    width: 90%!important;
+    height: px2rem(350)!important;
+    border-radius: px2rem(20);
+}
+.slider-frame {
+    border-radius: px2rem(10);
+}
+.slider-slide {
+    height: 100%!important;
+}
+
+.fined-tab-bars {
+    width: 100%;
+    height: px2rem(230);
+    // background: #ccc;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 px2rem(40);
+    margin-top: px2rem(20);
+    border-bottom:px2rem(1) solid #ccc;
+    .fined-tab-list {
+        width: px2rem(130);
+        height: px2rem(150);
+        // background: #000;
+        .fined-icon-run {
+            width: px2rem(100);
+            height: px2rem(100);
+            margin: 0 auto;
+            background: red;
+            border-radius: 50%;
+            .fined-icon {
+                font-size: px2rem(60);
+                text-align: center;
+                line-height: px2rem(100);
+                color: #fff;
+            }
+            .font-sizes {
+                text-align: center;
+                line-height: px2rem(100);
+                color: #fff;
+                font-size: px2rem(100);
+            }
+        }
+        .fined-icon-text {
+            font-size: px2rem(30);
+            padding-top: px2rem(20);
+            color: #000;
+        }
+    }
+}
+.common-song-wrap {
+    width: 100%;
+    // height: px2rem(500);
+    background: #ccc;
+    margin-top:px2rem(20);
+    .common-song-title {
+        width: 100%;
+        height: px2rem(80);
+        background: #fff;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 px2rem(20);
+        .common-song-left {
+            color: #000;
+            font-size: px2rem(35);
+            font-weight: 800;
+        }
+        .common-song-right {
+            font-size: px2rem(25);
+            padding: px2rem(5) px2rem(15);
+            border-radius: px2rem(30);
+            line-height: px2rem(35);
+            height: px2rem(45);
+            border: 1px solid #ccc;
+            color: #000;
+        }
+    }
+    .recommended-song-list {
+        width: 100%;
+        // height: px2rem(400);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        padding: px2rem(10) px2rem(40);
+        .recommended-song-tip {
+            width: px2rem(250);
+            height: px2rem(310);
+            // background: #fff;
+            margin-top: px2rem(30);
+            .recommended-song-price {
+                width: px2rem(250);
+                height: px2rem(250);
+                background: lightblue;
+                border-radius: px2rem(20);
+                overflow: hidden;
+                img {
+                    width: 100%;
+                    height: 100%;
+                }
+            }
+            .recommended-song-text {
+                width: px2rem(250);
+                font-size: px2rem(30);
+                text-align: left;
+                color: #000;
+            }
+        }
+    }
+}

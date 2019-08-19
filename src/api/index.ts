@@ -11,7 +11,11 @@ import fetch from '../utils/fetch'
 function login(data: any) {
   return fetch.post('/login/cellphone', data)
 }
+function recommendSong() {
+  return fetch.post('/personalized')
+}
 
 export {
-  login
+  login,
+  recommendSong
 }

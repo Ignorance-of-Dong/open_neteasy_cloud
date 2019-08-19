@@ -13,7 +13,7 @@ let fetchs = {
     * @param headers
     * @returns {Promise}
     */
-   get: (url, params) => {
+   get: (url, params?) => {
      if (params) {
          var paramsArray = [];
          Object.keys(params).forEach(function (key) {
@@ -44,7 +44,7 @@ let fetchs = {
        })
      })
  },
- post: (url, options) => {
+ post: (url, options?) => {
    return fetch(url, {
      method: 'post',
      headers: {
