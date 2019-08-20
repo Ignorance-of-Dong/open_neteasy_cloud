@@ -56,6 +56,7 @@
     // height: px2rem(500);
     // background: #ccc;
     margin-top:px2rem(20);
+    margin-bottom:px2rem(40);
     .common-song-title {
         width: 100%;
         height: px2rem(80);
@@ -113,5 +114,103 @@
                 margin:0;
             }
         }
+    }
+    .song-mv-list {
+        width: 100%;
+        .song-mv-tips{
+            width: 90%;
+            margin: px2rem(20) auto;
+            height: px2rem(700);
+            background: #efefef;
+            border-radius: px2rem(10);
+            
+            .song-mv-tip-wrap {
+                width: 100%;
+                height: px2rem(600);
+                overflow: hidden;
+
+                // background: red;
+                border-radius: px2rem(10);
+                .song-mv-tip-pri {
+                    width: 100%;
+                    height: px2rem(500);
+                    img {
+                        width: 100%;
+                        height: 100%;
+                    }
+                }
+                .song-mv-tip-name {
+                    width: 100%;
+                    height: px2rem(100);
+                    // background: lightcoral;
+                    line-height: px2rem(100);
+                    font-size: px2rem(30);
+                    text-align: left;
+                    padding: 0 px2rem(30);
+                    color: #000;
+                    font-weight: 800;
+                }
+            }
+            .song-mv-tip-comm {
+                width: 100%;
+                height: px2rem(100);
+                // background: lightblue;
+                background: #fff;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                .song-mv-tip-comm-left {
+                    width: 40%;
+                    height: 100%;
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    background: #fff;
+                    padding: 0 px2rem(15);
+                    .thumbs-up {
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: center;
+                        .thumbs-icon {
+                            font-size: px2rem(40)
+                        }
+                    }
+                    .comment-up {
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: center;
+                        .comment-icon {
+                            font-size: px2rem(50)
+                        }
+                    }
+                    span {
+                        padding-left: px2rem(10);
+                    }
+                    
+                }
+                .song-mv-tip-comm-right {
+                    width: 10%;
+                    height: 100%;
+                    background: #fff;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    position: relative;
+                    font-size: px2rem(40);
+                    .no-interest {
+                        position: absolute;
+                        bottom: px2rem(-60);
+                        right: px2rem(20);
+                        width: px2rem(300);
+                        height: px2rem(82);
+                        background: #ccc;
+                        box-shadow: 2px 1px 1px #ccc;
+                        z-index: 9999;
+                    }
+                }
+            }
+            
+        }
+        
     }
 }

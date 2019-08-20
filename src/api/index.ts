@@ -12,7 +12,7 @@ function login(data: any) {
   return fetch.post('/login/cellphone', data)
 }
 function recommendSong() {
-  return fetch.post('/personalized')
+  return fetch.post('/personalized/mv')
 }
 
 export {
