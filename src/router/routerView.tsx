@@ -5,8 +5,8 @@ function RouterView(props: any) {
     let routers = props.routers ? props.routers : props.routerList
     // const { route } = this.props;
     const defaultRouter = <Route path="/" component={() => {
-        return <Redirect to="/index/fined" key={22}/>
-    }} key={22} />
+        return <Redirect to="/home" key={22}/>
+    }} key={22} exact/>
     return (
         <HashRouter>
             <Suspense fallback={<div></div>}>
@@ -14,7 +14,7 @@ function RouterView(props: any) {
                     {
                         routers.map((item, index) => {
                             const Comp = item.component
-                            return <Route path={item.path} component={(routers) => {
+                            return <Route path={item.path} exact={item.exact} component={(routers) => {
                                 return <Comp route={item.children} {...routers}></Comp>
                             }} key={index}/>
                         }).concat(defaultRouter)

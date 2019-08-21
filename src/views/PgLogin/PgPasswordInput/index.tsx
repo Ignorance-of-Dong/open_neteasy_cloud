@@ -12,14 +12,17 @@ function PgPasswordInput(props: any) {
     let { phone } = useQuery()
     function toLogin(password) {
         
-        // console.log(password, '去登陆')
+        console.log(password, '去登陆')
         let params = {
             phone: phone,
             password: password
         }
-        login(params).then(res => {
-            console.log(res)
-        })
+        if (!phone) {
+            login(params).then(res => {
+                console.log(res)
+            })
+        }
+        props.history.push('/index/fined')
     }
     return (
         <>

@@ -138,12 +138,12 @@
             .left-slider-tab-bar {
                 width: 90%;
                 height: px2rem(170);
-                // background: #ccc;
                 border-bottom: px2rem(1) solid #ccc;;
                 margin:px2rem(150) auto;
                 margin-bottom: 0;
+                background: #fff;
                 display: flex;
-                justify-content: space-evenly;
+                justify-content: space-between;
                 align-items: center;
                 .l-s-t-b-coule{
                     display: flex;

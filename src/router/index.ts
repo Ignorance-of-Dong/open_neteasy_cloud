@@ -29,29 +29,39 @@ export default {
             exact: true
         },
         {
+            path: "/mvdetails",
+            component: React.lazy(() => import('../views/PgMvDetails')),
+            exact: false
+        },
+        {
+            path: "/playdetails",
+            component: React.lazy(() => import('../views/PgPlayDetails')),
+            exact: false
+        },
+        {
             path: "/index",
             component: React.lazy(() => import('../views/PgIndex')),
-            exact: true,
+            exact: false,
             children: [
                 {
                     path: "/index/fined",
                     component: React.lazy(() => import('../views/PgFind')),
-                    exact: false,
+                    exact: true,
                 },
                 {
                     path: "/index/my",
                     component: React.lazy(() => import('../views/PgMy')),
-                    exact: false,
+                    exact: true,
                 },
                 {
                     path: "/index/firends",
                     component: React.lazy(() => import('../views/PgFirends')),
-                    exact: false,
+                    exact: true,
                 },
                 {
                     path: "/index/vidio",
                     component: React.lazy(() => import('../views/PgVidio')),
-                    exact: false,
+                    exact: true,
                 }
             ]
         },

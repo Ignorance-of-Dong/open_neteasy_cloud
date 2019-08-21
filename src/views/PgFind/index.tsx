@@ -1,20 +1,73 @@
-import React, {useEffect} from 'react'
+import React, { useEffect, useState } from 'react'
 import { Carousel, WingBlank } from 'antd-mobile';
 import './index.scss'
 import { Icons } from '../../components'
-import { recommendSong } from '../../api/index'
-function PgFind() {
+// import { recommendSong } from '../../api/index'
+
+function MvModule(props: any) {
+    // console.log(res, 'res')
+    let res = props.res
+    let [show, setshow] = useState(false)
+
+    function toMvDetails() {
+        console.log(111)
+        console.log(props)
+        props.history.push('/mvdetails')
+    }
+    return (
+        <>
+            <div className="song-mv-tips">
+                <div className="song-mv-tip-wrap">
+                    <div className="song-mv-tip-pri" onClick={() => {
+                        toMvDetails()
+                    }}>
+                        <img src={res.picUrl} alt="" />
+                    </div>
+                    <div className="song-mv-tip-name">
+                        {res.name}
+                    </div>
+                </div>
+                <div className="song-mv-tip-comm">
+                    <div className="song-mv-tip-comm-left">
+                        <div className="thumbs-up">
+                            <Icons className='thumbs-icon' un='&#xe60e;' />
+                            <span>{res.duration}</span>
+                        </div>
+                        <div className="comment-up">
+                            <Icons className='comment-icon' un='&#xe67b;' />
+                            <span>{res.playCount}</span>
+                        </div>
+                    </div>
+                    <div className="song-mv-tip-comm-right">
+                        <Icons className='comment-icon' un='&#xe629;' onClick={() => {
+                            setshow(!show)
+                        }} />
+                        {show ? <div className="no-interest" onClick={() => { setshow(false) }}>不感兴趣</div> : null}
+                    </div>
+                </div>
+            </div>
+        </>
+    )
+}
+
+
+
+
+function PgFind(props: any) {
     // let [imgHeight, setimgHeight] = useState('100')
     let data = [
-        'http://p1.music.126.net/XFGTolOA4knoDuTjctkSHg==/109951164305143125.jpg', 
-        'http://p1.music.126.net/cfHZQ40S6_ark3NLO2gQjw==/109951164304381122.jpg', 
+        'http://p1.music.126.net/XFGTolOA4knoDuTjctkSHg==/109951164305143125.jpg',
+        'http://p1.music.126.net/cfHZQ40S6_ark3NLO2gQjw==/109951164304381122.jpg',
         'http://p1.music.126.net/4jZ1L1qECEOsikW2JKsyHQ==/109951164304393164.jpg'
     ]
     useEffect(() => {
-        recommendSong().then(res => {
-            console.log(res)
-        })
+        // recommendSong().then(res => {
+        //     console.log(res)
+        // })
     })
+    function toPlayDetails() {
+        props.history.push('/playdetails')
+    }
     let c = [
         {
             "id": 2829883282,
@@ -215,8 +268,8 @@ function PgFind() {
                 <Carousel
                     autoplay={true}
                     infinite
-                    beforeChange={() => {}}
-                    afterChange={() => {}}
+                    beforeChange={() => { }}
+                    afterChange={() => { }}
                 >
                     {data.map(val => (
                         <span
@@ -285,8 +338,10 @@ function PgFind() {
                             c.map(item => {
                                 return (
                                     <div className="recommended-song-tip" key={item.id}>
-                                        <div className="recommended-song-price">
-                                            <img src={item.picUrl} alt=""/>
+                                        <div className="recommended-song-price" onClick={() => {
+                                            toPlayDetails()
+                                        }}>
+                                            <img src={item.picUrl} alt="" />
                                         </div>
                                         <div className='recommended-song-text'>
                                             {item.name}
@@ -325,7 +380,7 @@ function PgFind() {
                         }
                     </div>
                 </div>
-            </div>  
+            </div>
             <div className="common-song-wrap">
                 <div className="common-song-title">
                     <div className="common-song-left">
@@ -340,41 +395,14 @@ function PgFind() {
                         {
                             m.map(res => {
                                 return (
-                                    <div className="song-mv-tips">
-                                        <div className="song-mv-tip-wrap">
-                                            <div className="song-mv-tip-pri">
-                                                <img src={res.picUrl} alt="" />
-                                            </div>
-                                            <div className="song-mv-tip-name">
-                                                {res.name}
-                                            </div>
-                                        </div>
-                                        <div className="song-mv-tip-comm">
-                                            <div className="song-mv-tip-comm-left">
-                                                <div className="thumbs-up">
-                                                    <Icons className='thumbs-icon' un='&#xe60e;' />
-                                                    <span>{res.duration}</span>
-                                                </div>
-                                                <div className="comment-up">
-                                                    <Icons className='comment-icon' un='&#xe67b;' />
-                                                    <span>{res.playCount}</span>
-                                                </div>
-                                            </div>
-                                            <div className="song-mv-tip-comm-right">
-                                                <Icons className='comment-icon' un='&#xe629;' />
-                                                <div className="no-interest">
-                                                    
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    <MvModule res={res} key={res.id} {...props}/>
                                 )
                             })
                         }
-                        
+
                     </div>
                 </div>
-            </div>  
+            </div>
         </>
     )
 }

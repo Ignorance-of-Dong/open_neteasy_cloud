@@ -1,0 +1,72 @@
+@import 'src/assets/style/px2rem.scss';
+.play-details-wrap {
+    width: 100%;
+    height: 100%;
+    // background: #ccc;
+    .play-details-title {
+        width: 100%;
+        height: px2rem(400);
+        // background: #ccc;
+        background-image: 'http://p1.music.126.net/YbT4C2XecT7Kz8n9m9_lwA==/109951164101259101.jpg';
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: px2rem(20) px2rem(50);
+        .play-details-left-pic {
+            width: px2rem(260);
+            height: px2rem(260);
+            background: lightblue;
+            border-radius: px2rem(15);
+            overflow: hidden;
+            img{
+                width: 100%;
+                height: 100%;
+            }
+        }
+        .play-details-right-detail {
+            flex: 1;
+            display: flex;
+            // justify-content: space-between;
+            // align-items: center;
+            flex-direction: column;
+            padding: 0 px2rem(30);
+            .play-details-right-detail-title {
+                color: #fff;
+                line-height: px2rem(50);
+            }
+            .play-details-right-detail-author{
+                display: flex;
+                justify-content: flex-start;
+                align-items: center;
+                margin-top:px2rem(20);
+                .play-details-right-detail-author-header{
+                    width: px2rem(50);
+                    height: px2rem(50);
+                    background: lightgoldenrodyellow;
+                    border-radius: 50%;
+                    overflow: hidden;
+                    img {
+                        width: 100%;
+                        height: 100%;
+                    }
+                }
+                .play-details-right-detail-author-name {
+                    font-size:px2rem(25);
+                    padding-left: px2rem(10);
+                }
+            }
+            .play-details-right-detail-introduce {
+                width: px2rem(330);
+                height: px2rem(80);
+                // background: lightgreen;
+                display: -webkit-box;
+                -webkit-box-orient: vertical;
+                -webkit-line-clamp: 2;
+                overflow: hidden;
+                font-size: px2rem(25);
+                line-height: px2rem(40);
+                margin-top:px2rem(20);
+            }
+        }
+    }
+}
