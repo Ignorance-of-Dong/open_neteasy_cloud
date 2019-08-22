@@ -3,15 +3,38 @@
     width: 100%;
     height: 100%;
     // background: #ccc;
+    display: flex;
+    flex-direction: column;
     .play-details-title {
         width: 100%;
-        height: px2rem(400);
-        // background: #ccc;
-        background-image: 'http://p1.music.126.net/YbT4C2XecT7Kz8n9m9_lwA==/109951164101259101.jpg';
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: px2rem(20) px2rem(50);
+        height: px2rem(450);
+        overflow: hidden;
+        position: relative;
+        .play-details-title-mask {
+            width: 100%;
+            height: px2rem(450);
+            position: absolute;
+            top:0;
+            left: 0;
+            background:url(https://p1.music.126.net/1ps8p2zDZ-eBWZoJOYe86Q==/109951164305864441.jpg);
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: 50%;
+            filter: blur(20px);
+            z-index: 0;
+        }
+        .play-details-title-mask-content {
+            width: 100%;
+            height: px2rem(450);
+            position: absolute;
+            top:0;
+            left: 0;
+            z-index: 1;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: px2rem(20) px2rem(50);
+        }
         .play-details-left-pic {
             width: px2rem(260);
             height: px2rem(260);
@@ -52,7 +75,8 @@
                 }
                 .play-details-right-detail-author-name {
                     font-size:px2rem(25);
-                    padding-left: px2rem(10);
+                    padding-left: px2rem(15);
+                    color: #fff;
                 }
             }
             .play-details-right-detail-introduce {
@@ -66,6 +90,94 @@
                 font-size: px2rem(25);
                 line-height: px2rem(40);
                 margin-top:px2rem(20);
+                color: #fff;
+            }
+        }
+    }
+    .play-details-content {
+        width: 100%;
+        flex: 1;
+        // overflow-y: auto;
+        background: #ccc;
+        display: flex;
+        flex-direction: column;
+        .play-details-content-title {
+            width: 100%;
+            height: px2rem(130);
+            background: #fff;
+            border-radius: px2rem(60) px2rem(60) 0 0;
+            .play-details-content-title-playok {
+                width: 100%;
+                height: 100%;
+                display: flex;
+                justify-content: flex-start;
+                align-items: center;
+                padding:0 px2rem(40);
+                .playok-icon {
+                    margin-right: px2rem(20);
+                    font-size: px2rem(60);
+                }
+                .start-play-all {
+                    font-size: px2rem(40);
+                }
+                .song-number {
+                    font-size: px2rem(30);
+                    color: #ccc;
+                }
+            }
+        }
+        .play-details-content-song-listview {
+            width: 100%;
+            flex: 1;
+            // background: lightcyan;
+            overflow-y: auto;
+            .play-details-content-song-tip {
+                width: 100%;
+                height: px2rem(130);
+                background: #fff;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 0 px2rem(20);
+                .serial-number {
+                    width: px2rem(130);
+                    height: px2rem(130);
+                    text-align: center;
+                    line-height: px2rem(130);
+                    font-size: px2rem(40);
+                    color: #999;
+                }
+                .serial-content-wrap {
+                    flex: 1;
+                    // height: 100%;
+                    // background: lightseagreen;
+                    .alias {
+                        font-size: px2rem(30);
+                        color: #666;
+                    }
+                    .serial-content-song-name {
+                        font-size: px2rem(40);
+                    }
+                    .serial-content-song-author {
+                        font-size: px2rem(30);
+                        margin-top:px2rem(10)
+                    }
+                }
+                .serial-all {
+                    width: px2rem(130);
+                    height: px2rem(130);
+                    // background: lightblue;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    .playok-icon {
+                        // margin-right: px2rem(20);
+                        font-size: px2rem(60);
+                        // margin:0 auto;
+                        display: block;
+                        color: #ccc;
+                    }
+                }
             }
         }
     }
