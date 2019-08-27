@@ -31,7 +31,7 @@ function Speed(props: any) {
                 }}
                 // dots={true}
                 defaultValue={0}
-                // value={props.currenttime !== '00:00' ? props.currenttime : 0}
+                value={props.currenttime !== '00:00' ? props.currenttime : 0}
                 min={0}
                 max={props.musicTime !== '00:00' ? props.musicTime : 0}
                 onChange={logs()}
@@ -51,11 +51,11 @@ function PgMusicPlayer(props: any) {
             audiosRef.current.play()
             audiosRef.current.addEventListener("timeupdate", function () {
                 setcurrenttime(audiosRef.current.currentTime)
-            })
-            audiosRef.current.addEventListener("onended", function () {
+            }, false)
+            audiosRef.current.addEventListener("ended", function () {
                 setstatePlay(false)
                 // setcurrenttime(audiosRef.current.currentTime)
-            })
+            }, false)
         } else {
             audiosRef.current.pause()
         }
