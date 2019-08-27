@@ -1,15 +1,15 @@
-import React, {useEffect} from 'react'
+import React from 'react'
 import "../../../node_modules/video-react/dist/video-react.css";
 import './index.scss'
 import { Icons } from '../../components'
 // import { mvsetusl, mvdetails, relatedAllvideo, commentMv, playlistDetail } from '../../api'
 import { Player, BigPlayButton, ControlBar, ReplayControl} from 'video-react';
 function PgMvDeatils() {
-    useEffect(() => {
-        // playlistDetail().then(res => {
-        //     console.log(res)
-        // })
-    })
+    // useEffect(() => {
+    //     playlistDetail().then(res => {
+    //         console.log(res)
+    //     })
+    // })
     let mvd = [
         {
             "type": 1,

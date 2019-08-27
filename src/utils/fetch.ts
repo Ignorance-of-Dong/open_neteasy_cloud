@@ -36,7 +36,7 @@ let fetchs = {
      }
      return fetch(url, fetchConfig).then(response => {
        return response.json().then((res) => {
-         if (response.ok && res.code === 1) {
+         if (response.ok && res.code === 200) {
            return Promise.resolve(res)
          } else {
            return Promise.reject(res)
@@ -56,7 +56,7 @@ let fetchs = {
      body: JSON.stringify(options)
    }).then(response => {
      return response.json().then((res) => {
-       if (response.ok && res.code === 1) {
+       if (response.ok && res.code === 200) {
          return Promise.resolve(res)
        } else {
          return Promise.reject(res)

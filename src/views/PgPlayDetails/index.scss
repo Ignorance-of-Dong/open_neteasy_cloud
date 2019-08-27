@@ -101,6 +101,8 @@
         background: #ccc;
         display: flex;
         flex-direction: column;
+        // overflow-y: auto;
+        overflow: hidden;
         .play-details-content-title {
             width: 100%;
             height: px2rem(130);
@@ -130,7 +132,10 @@
             width: 100%;
             flex: 1;
             // background: lightcyan;
+            background: #fff;
             overflow-y: auto;
+            -webkit-overflow-scrolling : touch;
+            padding-bottom: px2rem(100);
             .play-details-content-song-tip {
                 width: 100%;
                 height: px2rem(130);
@@ -152,15 +157,29 @@
                     // height: 100%;
                     // background: lightseagreen;
                     .alias {
-                        font-size: px2rem(30);
+                        flex: 1;
+                        white-space: nowrap;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                        font-size: px2rem(25);
                         color: #666;
+                        padding-left: px2rem(5);
+                        padding-top:px2rem(10);
+                    }
+                    .name {
+                         font-size: px2rem(35);
                     }
                     .serial-content-song-name {
-                        font-size: px2rem(40);
+                        // font-size: px2rem(35);
+                        display: flex;
+                        justify-content: flex-start;
+                        // align-items: center;
+                        // flex-wrap: wrap;
                     }
                     .serial-content-song-author {
-                        font-size: px2rem(30);
-                        margin-top:px2rem(10)
+                        font-size: px2rem(27);
+                        margin-top:px2rem(10);
+                        color: #666;
                     }
                 }
                 .serial-all {

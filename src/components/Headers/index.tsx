@@ -10,7 +10,7 @@ function Headers(props: any) {
                     </svg>
                 </div>
                 <div className="text-header">
-                    手机号登陆
+                    {props.children || '手机号登陆'}
                 </div>
             </div>
         </>

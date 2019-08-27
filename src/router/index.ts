@@ -39,6 +39,11 @@ export default {
             exact: false
         },
         {
+            path: "/musicplayer",
+            component: React.lazy(() => import('../views/PgMusicPlayer')),
+            exact: false
+        },
+        {
             path: "/index",
             component: React.lazy(() => import('../views/PgIndex')),
             exact: false,

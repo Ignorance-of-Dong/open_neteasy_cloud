@@ -3,7 +3,7 @@ import './index.scss'
 import { Icons } from '../../components'
 import data from './bigdata'
 let datas = data.playlist.tracks
-function PgPlayDetails() {
+function PgPlayDetails(props: any) {
     return (
         <>
             <div className="play-details-wrap">
@@ -40,12 +40,14 @@ function PgPlayDetails() {
                         {
                             datas.map((res, index) => {
                                 return (
-                                    <div className="play-details-content-song-tip" key={index}>
+                                    <div className="play-details-content-song-tip" key={index} onClick={() => {
+                                        props.history.push('/musicplayer')
+                                    }}>
                                         <div className="serial-number">
                                             {(index + 1)}.
                                         </div>
                                         <div className="serial-content-wrap">
-                                            <div className='serial-content-song-name'>{res.name} <span className='alias'>{JSON.stringify(res.alia) === '{}' ? '' : `(${res.alia[0]})`}</span> </div>
+                                            <div className='serial-content-song-name'><span className='name'>{res.name}</span> <span className='alias'>{JSON.stringify(res.alia) === '{}' ? '' : `(${res.alia[0]})`}</span> </div>
                                             <div className='serial-content-song-author'>{res.ar[0].name}</div>
                                         </div>
                                         <div className="serial-all">
