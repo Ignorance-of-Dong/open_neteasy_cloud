@@ -21,6 +21,7 @@
         width: 100%;
         flex: 1;
         overflow-y: auto;
+        -webkit-overflow-scrolling : touch;
     }
     .mv-vidio-title {
         width: 100%;

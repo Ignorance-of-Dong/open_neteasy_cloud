@@ -13,6 +13,8 @@
     width: 100%;
     height: 100%;
     // background: #ccc;
+    
+    // animation-play-state: paused;
     position: relative;
     top:0;
     left:0;
@@ -20,9 +22,10 @@
     display: flex;
     flex-direction: column;
     overflow: hidden;
+    padding-bottom: px2rem(20);
     .music-player-content-logo {
         width: 100%;
-        height: 70%;
+        height: 65%;
         // background: #ccc;
         position: relative;
         .rotate-music-logo-wraps {
@@ -30,6 +33,7 @@
             position: absolute;
             top:50%;
             left: 50%;
+            animation: rotates 3s linear infinite;
             margin-left: px2rem(-275);
             margin-top: px2rem(-275);
             width: px2rem(550);
@@ -155,6 +159,84 @@
 .audios {
     background: #000;
     position: absolute;
-    z-index: -999;
+    z-index: -888;
     opacity: 0;
+}
+.eject-module-wrap {
+    width: 100%;
+    height: px2rem(1000);
+    background: #fff;
+    border-radius: px2rem(45) px2rem(45) 0 0;
+    display: flex;
+    flex-direction: column;
+    .eject-module-wrap-title {
+        width: 100%;
+        height: px2rem(120);
+        border-bottom: px2rem(1) solid #ccc;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 px2rem(30);
+        .eject-module-wrap-title-left {
+            // height: 100%;
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            .player-list-icon {
+                font-size: px2rem(50)
+            }
+            .list-t {
+                font-size: px2rem(30);
+                padding-left: px2rem(10);
+                color: #000;
+            }
+            .list-len {
+                font-size: px2rem(25);
+                padding-left: px2rem(5);
+            }
+        }
+    }
+    .eject-module-wrap-content-list {
+        width: 100%;
+        flex: 1;
+        overflow-y: auto;
+        -webkit-overflow-scrolling : touch;
+        .eject-module-wrap-content-tip {
+            width: 100%;
+            height: px2rem(120);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 px2rem(40);
+            &:active {
+                background: gainsboro;
+            }
+            .eject-module-wrap-content-name {
+                flex: 1;
+                display: flex;
+                justify-content: flex-start;
+                align-items: center;
+                height: 100%;
+                color: #000;
+                .eject-module-wrap-music-name {
+                    font-size: px2rem(35);
+                }
+                .eject-module-icon {
+                    padding-right: px2rem(10);
+                }
+                span {
+                    color: #ccc;
+                }
+                .eject-module-wrap-music-author {
+                    font-size: px2rem(25);
+                    padding-top:px2rem(10);
+                    color: #ccc;
+                }
+            }
+        }
+    }
+
+}
+.am-modal-content {
+    background: transparent!important;
 }
