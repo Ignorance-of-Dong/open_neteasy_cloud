@@ -7,26 +7,18 @@
  */
 // import axios from 'axios'
 import fetch from '../utils/fetch'
-// import axios from 'axios'
 
 function login(data: any) {
   return fetch.post('/login/cellphone', data)
 }
-function recommendSong() {
-  return fetch.post('/personalized/mv')
-}
+
 /**
  * 查询mv的地址
  */
 function mvsetusl() {
   return fetch.post('/mv/url?id=5436712')
 }
-/**
- * 查询mv的详情
- */
-function mvdetails() {
-  return fetch.post('/mv/detail?mvid=5436712')
-}
+
 /**
  * 查询视频标签列表
  */
@@ -34,35 +26,99 @@ function videoGroup() {
   return fetch.post('/video/group?id=9104')
 }
 
+
+
+
+
+
+/**
+ * 推荐歌单
+ */
+function apipersonalizedSongList(params) {
+  return fetch.post(`/personalized?limit=${params.limit}`, {})
+}
+
+/**
+ * 推荐新碟
+ */
+function apialbum(params) {
+  return fetch.post(`/top/album?limit=${params.limit}`, {})
+}
+
+
+/**
+ * 推荐mv
+ * @param params 
+ */
+function apipersonalizedMv(params) {
+  return fetch.post(`/personalized/mv?limit=${params.limit}`, {})
+}
+
+
+/**
+ * 查询歌单详情
+ */
+
+function apiplaylistDetail(params) {
+  return fetch.post(`/playlist/detail?id=${params.id}`, {})
+}
+
+/**
+ * 查询歌曲地址
+ */
+
+function apisongurl(params) {
+  return fetch.post(`/song/url?id=${params.id}`, {})
+}
+
+/**
+ * 查询mv的详情
+ */
+function apimvdetails(params) {
+  return fetch.post(`/mv/detail?mvid=${params.id}`, {})
+}
+
+
 /**
  * 查询相关视频
  */
-function relatedAllvideo() {
-  return fetch.post('/related/allvideo?id=89ADDE33C0AAE8EC14B99F6750DB954D')
+function apirelatedAllvideo(params) {
+  return fetch.post(`/related/allvideo?id=${params.id}`)
 }
 
 /**
  * mv评论
  */
-
-function commentMv() {
-  return fetch.post('/comment/mv?id=5436712')
+function apicommentMv(params) {
+  return fetch.post(`/comment/mv?id=${params.id}`)
 }
 
 /**
- * 查询歌单列表
+ * 相似mv
  */
-
-function playlistDetail() {
-  return fetch.post('/playlist/detail?id=2796823560')
+function apisimiMv(params) {
+  return fetch.post(`/simi/mv?mvid=${params.id}`)
 }
+
+/**
+ * 最新mv
+ */
+function apifirstMv(params?) {
+  return fetch.post(`/mv/first?limit=10`)
+}
+
 export {
   login,
-  recommendSong,
+  apipersonalizedMv,
   mvsetusl,
-  mvdetails,
   videoGroup,
-  relatedAllvideo,
-  commentMv,
-  playlistDetail
+  apirelatedAllvideo,
+  apicommentMv,
+  apiplaylistDetail,
+  apipersonalizedSongList,
+  apialbum,
+  apisongurl,
+  apimvdetails,
+  apisimiMv,
+  apifirstMv
 }

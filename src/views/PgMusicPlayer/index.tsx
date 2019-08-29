@@ -3,9 +3,8 @@ import './index.scss'
 import { Headers, Icons, Toast } from '../../components'
 import { Slider, Modal } from 'antd-mobile';
 import formatSeconds from '../../utils/formatSeconds'
-import data from '../PgPlayDetails/bigdata'
-let datas = data.playlist.tracks
-console.log(datas)
+import query from '../../utils/useQuery'
+import { apisongurl } from '../../api'
 interface currentProps{
     currenttime: number | string
 }
@@ -51,10 +50,89 @@ function Speed(props: speedProps) {
 
 interface ejectModuleProps{
     showModule: boolean,
-    setshowModule: Function
+    setshowModule: Function,
+    getsongurl: Function,
+    setChildModuleScroll: Function,
+    lastSong?:Function,
+    id: any,
+    props: any
 }
 function EjectModule(props: ejectModuleProps) {
     let [_state, _setstate] = useState(0)
+    let [songListDetail, setsongListDetail] = useState([])
+    let [id, setid] = useState(0)
+    let listRef = useRef(null)
+    // let { id } = query()
+
+    useEffect(() => {
+        let { id } = query()
+        let list = JSON.parse(sessionStorage.getItem('songListDetails'))
+        setsongListDetail(list)
+        console.log('zhixian')
+        list.forEach((item, index) => {
+            if (item.id * 1 === id * 1) {
+                _setstate(index)
+                listRef.current.scrollTop = 50 * (index - 1)
+            }
+        })
+    }, [id])
+
+
+    function setScroll(scrollCurrent) {
+        if (listRef.current) {
+            setTimeout(() => {
+                listRef.current.scrollTop = scrollCurrent
+                setid(id++)
+            }, 50)
+        }
+    }
+
+
+    function setScrollTop() {
+        let list = JSON.parse(sessionStorage.getItem('songListDetails'))
+        let { id } = query()
+        list.forEach((item, index) => {
+            if (item.id * 1 === id * 1) {
+                sessionStorage.setItem('currScrollTop', (50 * (index - 1)).toString())
+                listRef.current.scrollTop = 50 * (index - 1)
+            }
+        })
+    }
+
+
+    // function setLastSong() {
+    //     if (props.type === 'add') {
+    //         _setstate(_state + 1)
+    //     } else if (props.type === 'last'){
+    //         _setstate(_state - 1)
+    //     }
+    //     let list = JSON.parse(sessionStorage.getItem('songListDetails'))
+    //     list.forEach((item, index) => {
+    //         if (_state === index) {
+    //             sessionStorage.setItem('currScrollTop', (50 * (index - 1)).toString())
+    //             // setTimeout(() => {
+    //             //     listRef.current.scrollTop = 50 * (index - 1)
+    //             // }, 0)
+    //             props.getsongurl(item.id)
+    //         }
+    //     })
+    // }
+
+    props.setChildModuleScroll(setScroll)
+
+    // props.lastSong(setLastSong)
+
+    useEffect(() => {
+        setScrollTop()
+    }, [])
+
+    function selectMusic(index, id) {
+        sessionStorage.setItem('currScrollTop', (50 * (index - 1)).toString())
+        _setstate(index)
+        props.props.history.replace(`/musicplayer?id=${id}`)
+        props.getsongurl(id)
+        listRef.current.scrollTop = 50 * (index - 1)
+    }
     return(
         <>
             <Modal
@@ -71,13 +149,13 @@ function EjectModule(props: ejectModuleProps) {
                             <span className='list-len'>(523)</span>
                         </div>
                     </div>
-                    <div className="eject-module-wrap-content-list">
+                    <div className="eject-module-wrap-content-list" ref={listRef}>
                         {
-                            datas.map((res, index) => {
+                            songListDetail.map((res, index) => {
                                 return(
                                     <div className="eject-module-wrap-content-tip" key={index}>
                                         <div className="eject-module-wrap-content-name" style={{ color: _state === index ? 'red' : ''}} onClick={() => {
-                                            _setstate(index)
+                                            selectMusic(index, res.id)
                                         }}>
                                             {_state === index ? <Icons className='eject-module-icon' un='&#xe659;' /> : null}
                                             <div className="eject-module-wrap-music-name">
@@ -104,7 +182,10 @@ function PgMusicPlayer(props: any) {
     let [musicTime, setmusicTime] = useState('00:00')
     let [currenttime, setcurrenttime] = useState('00:00')
     let [showModule, setshowModule] = useState(true)
+    let [songUrl, setsongUrl] = useState('')
+    let [songDetails, setsongDetails] = useState(null)
     let audiosRef = useRef(null)
+    // let [type, settype] = useState('')
     useEffect(() => {
         if (statePlay) {
             audiosRef.current.play().then((res) => {
@@ -117,51 +198,100 @@ function PgMusicPlayer(props: any) {
                 }, false)
                 audiosRef.current.addEventListener("ended", function () {
                     setstatePlay(false)
+                    setcurrenttime('00:00')
                 }, false)
             }).catch(err => {
+                console.log(err, 'err')
                 audiosRef.current.pause()
                 setstatePlay(false)
                 Toast('加载歌曲失败', 2000)
             })
-            
-            // console.log(audiosRef.current.canPlayType())
-           
         } else {
             audiosRef.current.pause()
         }
     }, [statePlay])
+    function getsongurl(id) {
+        let params = {
+            id: id
+        }
+        let list = JSON.parse(sessionStorage.getItem('songListDetails'))
+        list.forEach((item) => {
+            if (item.id * 1 === id * 1) {
+                console.log(item)
+                setsongDetails(item)
+            }
+        })
+        apisongurl(params).then(res => {
+            // console.log(res, 'res')
+            setsongUrl(res.data[0].url)  
+        }).catch(err => {
+            console.log(err, 'res')
+            Toast('网络请求异常，请两分钟后再试', 2000)
+        })
+    }
+    useEffect(() => {
+        let { id } = query()
+        getsongurl(id)
+    }, [])
+    
     function dropSpeed(currenttime) {
         audiosRef.current.pause()
         setcurrenttime(currenttime ? currenttime : 0)
-        // audiosRef.current.play()
+    }
+
+    function openModule() {
+        setshowModule(true)
+    }
+
+    function setChildModuleScroll(callback) {
+        let currScrollTop = sessionStorage.getItem('currScrollTop')
+        callback(currScrollTop)
+    }
+
+    function lastSong(callback) {
+        callback()
+    }
+
+    // function goUpSong(type) {
+    //     let state_type = type
+    // }
+
+    function goLastSong(type) {
+        let { id } = query()
+        let list = JSON.parse(sessionStorage.getItem('songListDetails'))
+        let _index = 0
+        for(let i = 0; i < list.length - 1; i++) {
+            if (list[i].id * 1 === id * 1) {
+                if (type === 'last') {
+                    _index = i - 1
+                } else {
+                    _index = i + 1
+                }
+                if(i < 0 || i >= list.length - 1) return
+                type === 'last' ? getsongurl(list[_index].id) : getsongurl(list[_index].id)
+                type === 'last' ? props.history.replace(`/musicplayer?id=${list[_index].id}`) : props.history.replace(`/musicplayer?id=${list[_index].id}`)
+            }
+        }
     }
     return (
         <>
             <div className="audios">
-                <audio 
-                //http://m10.music.126.net/20190827160923/0ea29ad605c0da827dd6864d1720a6a1/ymusic/952e/173c/9fb3/bb066f0666dd4f4691ee2e90c1e6702c.mp3
-                    // src={require('./1.mp3')}
-                    controls
-                    preload="auto"
-                    ref={audiosRef}
-                >
-                    <source src={require('./1.mp3')} />
-                </audio>
+                <audio src={songUrl} controls preload="auto" ref={audiosRef} />
             </div>
             
             <div className="music-player-wraps-mask" style={{
-                background: 'url(http://p2.music.126.net/SHElx36maw8L6CIXfiNbFw==/109951164144982394.jpg)',
+                background: `url(${songDetails ? songDetails.al.picUrl : 'http://p2.music.126.net/SHElx36maw8L6CIXfiNbFw==/109951164144982394.jpg'})`,
                 backgroundRepeat: 'no-repeat',
                 backgroundSize: 'cover',
                 backgroundPosition: '10%'
             }}>
             </div>
             <div className="music-player-wraps">
-                <Headers props={props}>羊角花又开</Headers>
+                <Headers props={props}>{songDetails ? songDetails.name : '加载中。。。'}</Headers>
                 <div className="music-player-content-logo">
                     <div className="rotate-music-logo-wraps" style={{ animationPlayState: statePlay ? 'running' : 'paused'}}>
                         <div className="rotate-music-logo">
-                            <img src="http://p2.music.126.net/i2YxMEF-Z7NzFloLQIVz4g==/109951164077348187.jpg?param=140y140" alt="" />
+                            <img src={songDetails ? songDetails.al.picUrl : 'http://p2.music.126.net/SHElx36maw8L6CIXfiNbFw==/109951164144982394.jpg'} alt="" />
                         </div>
                     </div>
                 </div>
@@ -200,19 +330,31 @@ function PgMusicPlayer(props: any) {
                             <Icons className='loop-icon' un='&#xe620;' />
                         </span>
                         <span>
-                            <Icons className='upper-icon' un='&#xe61e;' />
+                            <Icons className='upper-icon' un='&#xe61e;' onClick={() => {
+                                goLastSong('last')
+                            }}/>
                         </span>
                         <span onClick={() => {setstatePlay(!statePlay)}}>
                             {statePlay ? <Icons className='player-icon' un='&#xe60f;' /> : <Icons className='player-icon' un='&#xe628;' />}
                         </span>
                         <span>
-                            <Icons className='lower-icon' un='&#xe7a9;' />
+                            <Icons className='lower-icon' un='&#xe7a9;' onClick={() => {
+                                goLastSong('add')
+                            }}/>
                         </span>
                         <span>
                             <Icons className='list-icon' un='&#xe61a;' onClick={() => {
-                                setshowModule(true)
+                                openModule()
                             }}/>
-                            <EjectModule showModule={showModule} setshowModule={setshowModule}/>
+                            <EjectModule 
+                                showModule={showModule} 
+                                setshowModule={setshowModule} 
+                                getsongurl={getsongurl} 
+                                setChildModuleScroll={setChildModuleScroll}
+                                lastSong={lastSong}
+                                id={query().id}
+                                props={props}
+                            />
                         </span>
                     </div>
                 </div>

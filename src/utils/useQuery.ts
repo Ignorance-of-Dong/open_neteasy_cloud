@@ -1,5 +1,5 @@
 
-function useQuery(): any {
+function query(): any {
     let url = window.location.href
     if (url.indexOf('?') === -1) return null
     var arr1 = url.split("?");
@@ -12,4 +12,4 @@ function useQuery(): any {
     return obj;
 }
 
-export default useQuery
+export default query

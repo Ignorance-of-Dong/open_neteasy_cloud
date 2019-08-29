@@ -12,14 +12,10 @@
         position: relative;
         .play-details-title-mask {
             width: 100%;
-            height: px2rem(450);
+            height: px2rem(600);
             position: absolute;
             top:0;
             left: 0;
-            background:url(https://p1.music.126.net/1ps8p2zDZ-eBWZoJOYe86Q==/109951164305864441.jpg);
-            background-repeat: no-repeat;
-            background-size: cover;
-            background-position: 50%;
             filter: blur(20px);
             z-index: 0;
         }
@@ -38,7 +34,7 @@
         .play-details-left-pic {
             width: px2rem(260);
             height: px2rem(260);
-            background: lightblue;
+            background: #ccc;
             border-radius: px2rem(15);
             overflow: hidden;
             img{
@@ -65,7 +61,7 @@
                 .play-details-right-detail-author-header{
                     width: px2rem(50);
                     height: px2rem(50);
-                    background: lightgoldenrodyellow;
+                    background: #ccc;
                     border-radius: 50%;
                     overflow: hidden;
                     img {
@@ -97,12 +93,11 @@
     .play-details-content {
         width: 100%;
         flex: 1;
-        // overflow-y: auto;
-        background: #ccc;
         display: flex;
         flex-direction: column;
-        // overflow-y: auto;
         overflow: hidden;
+        position: relative;
+        z-index: 1;
         .play-details-content-title {
             width: 100%;
             height: px2rem(130);
