@@ -53,41 +53,50 @@ interface ejectModuleProps{
     setshowModule: Function,
     getsongurl: Function,
     setChildModuleScroll: Function,
-    lastSong?:Function,
-    id: any,
     props: any
 }
 function EjectModule(props: ejectModuleProps) {
     let [_state, _setstate] = useState(0)
     let [songListDetail, setsongListDetail] = useState([])
-    let [id, setid] = useState(0)
+    let [id, setid] = useState('')
     let listRef = useRef(null)
     // let { id } = query()
 
+    /**
+     * 实时获取歌曲在列表的位子【并在切换上一首 | 下一首实时更新】
+     */
     useEffect(() => {
         let { id } = query()
         let list = JSON.parse(sessionStorage.getItem('songListDetails'))
         setsongListDetail(list)
-        console.log('zhixian')
         list.forEach((item, index) => {
             if (item.id * 1 === id * 1) {
                 _setstate(index)
-                listRef.current.scrollTop = 50 * (index - 1)
+                setTimeout(() => {
+                    sessionStorage.setItem('currScrollTop', (50 * (index - 1)).toString())
+                    listRef.current.scrollTop = 50 * (index - 1)
+                }, 50)
             }
         })
     }, [id])
 
-
+    /**
+     * 弹层打开时设置歌曲列表scroll高度
+     * @param scrollCurrent scroll高度
+     */
     function setScroll(scrollCurrent) {
         if (listRef.current) {
             setTimeout(() => {
                 listRef.current.scrollTop = scrollCurrent
-                setid(id++)
+                let { id } = query()
+                setid(id)
             }, 50)
         }
     }
 
-
+    /**
+     * 设置歌曲列表scroll高度
+     */
     function setScrollTop() {
         let list = JSON.parse(sessionStorage.getItem('songListDetails'))
         let { id } = query()
@@ -99,33 +108,23 @@ function EjectModule(props: ejectModuleProps) {
         })
     }
 
-
-    // function setLastSong() {
-    //     if (props.type === 'add') {
-    //         _setstate(_state + 1)
-    //     } else if (props.type === 'last'){
-    //         _setstate(_state - 1)
-    //     }
-    //     let list = JSON.parse(sessionStorage.getItem('songListDetails'))
-    //     list.forEach((item, index) => {
-    //         if (_state === index) {
-    //             sessionStorage.setItem('currScrollTop', (50 * (index - 1)).toString())
-    //             // setTimeout(() => {
-    //             //     listRef.current.scrollTop = 50 * (index - 1)
-    //             // }, 0)
-    //             props.getsongurl(item.id)
-    //         }
-    //     })
-    // }
-
+    /**
+     * 实时更新歌曲列表scroll高度
+     */
     props.setChildModuleScroll(setScroll)
 
-    // props.lastSong(setLastSong)
-
+    /**
+     * 初始化获取歌曲列表scroll高度
+     */
     useEffect(() => {
         setScrollTop()
     }, [])
 
+    /**
+     * 切换音乐，并更新列表scroll高度
+     * @param index 歌曲列表的下标
+     * @param id 歌曲id
+     */
     function selectMusic(index, id) {
         sessionStorage.setItem('currScrollTop', (50 * (index - 1)).toString())
         _setstate(index)
@@ -185,7 +184,10 @@ function PgMusicPlayer(props: any) {
     let [songUrl, setsongUrl] = useState('')
     let [songDetails, setsongDetails] = useState(null)
     let audiosRef = useRef(null)
-    // let [type, settype] = useState('')
+
+    /**
+     * 执行播放 | 暂停
+     */
     useEffect(() => {
         if (statePlay) {
             audiosRef.current.play().then((res) => {
@@ -210,6 +212,11 @@ function PgMusicPlayer(props: any) {
             audiosRef.current.pause()
         }
     }, [statePlay])
+
+    /**
+     * 获取歌曲的链接地址
+     * @param id 歌曲id
+     */
     function getsongurl(id) {
         let params = {
             id: id
@@ -217,45 +224,53 @@ function PgMusicPlayer(props: any) {
         let list = JSON.parse(sessionStorage.getItem('songListDetails'))
         list.forEach((item) => {
             if (item.id * 1 === id * 1) {
-                console.log(item)
                 setsongDetails(item)
             }
         })
         apisongurl(params).then(res => {
-            // console.log(res, 'res')
             setsongUrl(res.data[0].url)  
         }).catch(err => {
             console.log(err, 'res')
             Toast('网络请求异常，请两分钟后再试', 2000)
         })
     }
+
+    /**
+     * 获取歌曲播放链接地址【初始化获取】
+     */
     useEffect(() => {
         let { id } = query()
         getsongurl(id)
     }, [])
     
+    /**
+     * 实时更新进度条【播放时间i】
+     */
     function dropSpeed(currenttime) {
         audiosRef.current.pause()
         setcurrenttime(currenttime ? currenttime : 0)
     }
 
+    /**
+     * 打开播放列表弹层
+     */
     function openModule() {
         setshowModule(true)
     }
 
+    /**
+     * 设置播放列表的scroll定位i高度
+     * @param callback 回调函数
+     */
     function setChildModuleScroll(callback) {
         let currScrollTop = sessionStorage.getItem('currScrollTop')
         callback(currScrollTop)
     }
 
-    function lastSong(callback) {
-        callback()
-    }
-
-    // function goUpSong(type) {
-    //     let state_type = type
-    // }
-
+    /**
+     * 获取上一首 | 下一首
+     * @param type 上一首或者下一首类型
+     */
     function goLastSong(type) {
         let { id } = query()
         let list = JSON.parse(sessionStorage.getItem('songListDetails'))
@@ -267,7 +282,12 @@ function PgMusicPlayer(props: any) {
                 } else {
                     _index = i + 1
                 }
-                if(i < 0 || i >= list.length - 1) return
+                if (_index < 0) {
+                    _index = 0
+                }
+                if (_index > list.length) {
+                    _index = list.length
+                }
                 type === 'last' ? getsongurl(list[_index].id) : getsongurl(list[_index].id)
                 type === 'last' ? props.history.replace(`/musicplayer?id=${list[_index].id}`) : props.history.replace(`/musicplayer?id=${list[_index].id}`)
             }
@@ -351,8 +371,6 @@ function PgMusicPlayer(props: any) {
                                 setshowModule={setshowModule} 
                                 getsongurl={getsongurl} 
                                 setChildModuleScroll={setChildModuleScroll}
-                                lastSong={lastSong}
-                                id={query().id}
                                 props={props}
                             />
                         </span>
