@@ -75,7 +75,7 @@ function PgLeftSlider() {
                     </div>
                     <div className="l-s-d-l-right bigsmall">
                         听说你也在想我
-                        </div>
+                    </div>
                 </div>
                 <div className="l-s-d-list">
                     <div className="l-s-d-l-left">
@@ -122,7 +122,7 @@ function PgLeftSlider() {
                     </div>
                     <div className="l-s-d-l-right bigsmall">
                         听说你也在想我
-                        </div>
+                    </div>
                 </div>
                 <div className="l-s-d-list">
                     <div className="l-s-d-l-left">
@@ -142,8 +142,6 @@ function PgLeftSlider() {
 
                     </div>
                 </div>
-            </div>
-            <div className="left-slider-demand-like">
                 <div className="l-s-d-list  mT">
                     <div className="l-s-d-l-left">
                         <Icons className='l-icon' un='&#xe75e;' />
@@ -169,7 +167,7 @@ function PgLeftSlider() {
                     </div>
                     <div className="l-s-d-l-right bigsmall">
                         听说你也在想我
-                        </div>
+                    </div>
                 </div>
                 <div className="l-s-d-list">
                     <div className="l-s-d-l-left">
@@ -190,6 +188,8 @@ function PgLeftSlider() {
                     </div>
                 </div>
             </div>
+
+
         </div>
 
     </List>

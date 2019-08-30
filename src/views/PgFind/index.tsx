@@ -5,10 +5,8 @@ import { Icons, Toast } from '../../components'
 import { apipersonalizedSongList, apialbum, apifirstMv } from '../../api/index'
 
 function MvModule(props: any) {
-    // console.log(res, 'res')
     let res = props.res
     let [show, setshow] = useState(false)
-    console.log(res, '111')
     function toMvDetails() {
         props.history.push(`/mvdetails?id=${res.id}`)
     }
@@ -55,13 +53,15 @@ function PgFind(props: any) {
     let [recommendedSongList, setrecommendedSongList] = useState([])
     let [newDish, setnewDish] = useState([])
     let [personalizedMv, setpersonalizedMv] = useState([])
+    let [_condition, _setcondition] = useState(false)
+    // let [isActual, setisActual] = useState(true)
     let data = [
         'http://p1.music.126.net/XFGTolOA4knoDuTjctkSHg==/109951164305143125.jpg',
         'http://p1.music.126.net/cfHZQ40S6_ark3NLO2gQjw==/109951164304381122.jpg',
         'http://p1.music.126.net/4jZ1L1qECEOsikW2JKsyHQ==/109951164304393164.jpg'
     ]
     useEffect(() => {
-        const getapipersonalizedSongList = async() => {
+        let getapipersonalizedSongList = async() => {
             let params = {
                 limit: 6
             }
@@ -73,22 +73,20 @@ function PgFind(props: any) {
         }
         getapipersonalizedSongList()
         
-    }, [])
+    }, [_condition])
     useEffect(() => {
-        const getapipersonalizedMv = async () => {
+        let getapipersonalizedMv = async () => {
             let params = {
                 limit: 6
             }
             await apifirstMv(params).then((res: any) => {
-                console.log(res, '........')
                 setpersonalizedMv(res.data)
             }).catch(err => {
                 Toast('网络请求异常，请两分钟后再试', 2000)
             })
         }
         getapipersonalizedMv()
-
-    }, [])
+    }, [_condition])
     useEffect(() => {
         let params = {
             limit: 3
@@ -97,8 +95,9 @@ function PgFind(props: any) {
             setnewDish(res.albums)
         }).catch(err => {
             Toast('网络请求异常，请两分钟后再试', 2000)
+            _setcondition(false)
         })
-    }, [])
+    }, [_condition])
     function toPlayDetails(id) {
         props.history.push(`/playdetails?id=${id}`)
     }

@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react'
 import './index.scss'
-import { Icons, Toast } from '../../components'
+import { Icons, Toast, Headers } from '../../components'
 import query from '../../utils/useQuery'
 import { apiplaylistDetail } from '../../api'
 function PgPlayDetails(props: any) {
@@ -24,6 +24,7 @@ function PgPlayDetails(props: any) {
     }, [])
     return (
         <>
+            
             <div className="play-details-wrap">
                 <div className="play-details-title">
                     <div className="play-details-title-mask" style={{
@@ -32,7 +33,9 @@ function PgPlayDetails(props: any) {
                         backgroundSize: 'cover',
                         backgroundPosition: '10%'
                     }}></div>
+                    <Headers className='postion-header' props={props}>{songListObj ? songListObj.name : '加载中。。。'}</Headers>
                     <div className="play-details-title-mask-content">
+                        
                         <div className="play-details-left-pic">
                             <img src={songListObj ? songListObj.coverImgUrl : ''} alt="" />
                         </div>

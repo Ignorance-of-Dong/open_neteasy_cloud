@@ -1,16 +1,16 @@
-import { Drawer, NavBar, Icon } from 'antd-mobile';
+import { NavBar, Icon } from 'antd-mobile';
 import React, { useState, useEffect } from 'react'
 // import {Icons} from '../../components'
 import RouterView from '../../router/routerView'
 import PgLeftSlider from '../PgLeftSlider'
 import './index.scss'
-function Index(props: any) {
+
+
+function LeftSilderAddTitle(props) {
     let [heightlight, setheightlight] = useState(1)
     let [open, setopen] = useState(false)
+
     
-    function onOpenChange(...args) {
-        setopen(!open)
-    }
     let tabBars = [
         {
             title: '我的',
@@ -29,6 +29,13 @@ function Index(props: any) {
             paths: '/index/vidio'
         }
     ]
+
+    function show(e) {
+        setopen(true)
+    }
+    function hide() {
+        setopen(false)
+    }
     // eslint 并不了解你的规则，应该在此处禁用eslint
     /* eslint-disable */
     useEffect(() => {
@@ -39,41 +46,48 @@ function Index(props: any) {
         setheightlight(index)
         props.history.push(path)
     }
-    const sidebar = (<PgLeftSlider/>)
+    return(
+        <>
+            <NavBar
+                mode="light"
+                icon={<Icon type="ellipsis" />}
+                rightContent={[
+                    <Icon key="0" type="search" style={{ marginRight: '10' }} />,
+                ]}
+                onLeftClick={show}
+            >
+                {
+                    tabBars.map((item, index) => {
+                        return (
+                            <div className={heightlight === index ? 'tab-index-bar-actived' : 'tab-index-bar'} onClick={() => {
+                                toTabable(item.paths, index)
+                            }} key={index}>{item.title}</div>
+                        )
+                    })
+                }
+            </NavBar>
+            <div className="left-mask-wrap" style={{
+                left: open ? '0px' : '-500px',
+                background: open ? 'rgba(47,44,44,0.7)' : '#fff'
+            }} onTouchEnd={()=>{hide()}}>
+                <div className="left-mask-wrap-content" onTouchEnd={(e) => {e.stopPropagation()}} >
+                    <PgLeftSlider />
+                </div>
+            </div>
+        </>
+    )
+}
+
+
+
+function Index(props: any) {
     return (
         <>
             <div className='index-wraps'>
-                <NavBar
-                    mode="light"
-                    icon={<Icon type="ellipsis" />}
-                    // onLeftClick={() => console.log('onLeftClick')}
-                    rightContent={[
-                        <Icon key="0" type="search" style={{ marginRight: '10' }} />,
-                        // <Icon key="1" type="ellipsis" />,
-                    ]}
-                    onLeftClick={onOpenChange}
-                >
-                    {
-                        tabBars.map((item, index) => {
-                            return (
-                                <div className={heightlight === index ? 'tab-index-bar-actived' : 'tab-index-bar'} onClick={() => {
-                                    toTabable(item.paths, index)
-                                }} key={index}>{item.title}</div>
-                            )
-                        })
-                    }
-                </NavBar>
-                <Drawer
-                    className="my-drawer"
-                    style={{ minHeight: document.documentElement.clientHeight - 45}}
-                    enableDragHandle
-                    contentStyle={{ color: '#A6A6A6', textAlign: 'center', paddingTop: 42 }}
-                    sidebar={sidebar}
-                    open={open}
-                    onOpenChange={onOpenChange}
-                >
-                    <RouterView routers={props.route}/>
-                </Drawer>
+                <LeftSilderAddTitle {...props}/>
+                <div className="index-wraps-content">
+                    <RouterView routers={props.route} />
+                </div>
             </div>
         </>
     );

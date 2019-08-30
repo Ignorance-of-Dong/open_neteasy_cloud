@@ -1,8 +1,7 @@
 import React, {useEffect, useState} from 'react'
 import "../../../node_modules/video-react/dist/video-react.css";
 import './index.scss'
-import { Icons } from '../../components'
-// import { mvsetusl, mvdetails, relatedAllvideo, commentMv, playlistDetail } from '../../api'
+import { Icons, Headers } from '../../components'
 import { apimvdetails, apisimiMv, apicommentMv } from '../../api'
 import { Player, BigPlayButton, ControlBar, ReplayControl} from 'video-react';
 import query from '../../utils/useQuery';
@@ -36,6 +35,7 @@ function PgMvDeatils(props: any) {
     return(
         <>
             <div className="mv-details-wraps">
+                <Headers className='postion-header' props={props}>{mvDetails ? mvDetails.name : '加载中。。。'}</Headers>
                 <div className="mv-vidio-wrap">
                     <Player
                         controls={false}

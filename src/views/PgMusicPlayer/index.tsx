@@ -206,7 +206,7 @@ function PgMusicPlayer(props: any) {
                 console.log(err, 'err')
                 audiosRef.current.pause()
                 setstatePlay(false)
-                Toast('加载歌曲失败', 2000)
+                Toast('加载歌曲失败,请重试！', 2000)
             })
         } else {
             audiosRef.current.pause()
@@ -267,6 +267,9 @@ function PgMusicPlayer(props: any) {
         callback(currScrollTop)
     }
 
+
+    enum typeCheck { add, last }
+
     /**
      * 获取上一首 | 下一首
      * @param type 上一首或者下一首类型
@@ -277,17 +280,21 @@ function PgMusicPlayer(props: any) {
         let _index = 0
         for(let i = 0; i < list.length - 1; i++) {
             if (list[i].id * 1 === id * 1) {
-                if (type === 'last') {
+                if (type === typeCheck[1]) {
                     _index = i - 1
                 } else {
                     _index = i + 1
                 }
                 if (_index < 0) {
                     _index = 0
+                    return
                 }
                 if (_index > list.length) {
                     _index = list.length
+                    return
                 }
+                audiosRef.current.pause()
+                setstatePlay(false)
                 type === 'last' ? getsongurl(list[_index].id) : getsongurl(list[_index].id)
                 type === 'last' ? props.history.replace(`/musicplayer?id=${list[_index].id}`) : props.history.replace(`/musicplayer?id=${list[_index].id}`)
             }
@@ -351,7 +358,7 @@ function PgMusicPlayer(props: any) {
                         </span>
                         <span>
                             <Icons className='upper-icon' un='&#xe61e;' onClick={() => {
-                                goLastSong('last')
+                                goLastSong(typeCheck[1])
                             }}/>
                         </span>
                         <span onClick={() => {setstatePlay(!statePlay)}}>
@@ -359,7 +366,7 @@ function PgMusicPlayer(props: any) {
                         </span>
                         <span>
                             <Icons className='lower-icon' un='&#xe7a9;' onClick={() => {
-                                goLastSong('add')
+                                goLastSong(typeCheck[0])
                             }}/>
                         </span>
                         <span>

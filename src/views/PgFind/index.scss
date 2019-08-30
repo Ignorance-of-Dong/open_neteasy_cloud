@@ -36,7 +36,9 @@
             margin: 0 auto;
             background: red;
             border-radius: 50%;
-
+            display: flex;
+            justify-content: center;
+            align-items: center;
             .fined-icon {
                 font-size: px2rem(60);
                 text-align: center;

@@ -8,9 +8,7 @@
 // import axios from 'axios'
 import fetch from '../utils/fetch'
 
-function login(data: any) {
-  return fetch.post('/login/cellphone', data)
-}
+
 
 /**
  * 查询mv的地址
@@ -107,8 +105,22 @@ function apifirstMv(params?) {
   return fetch.post(`/mv/first?limit=10`)
 }
 
+/**
+ * 获取用户的歌单哪
+ */
+function apiuserplayer(params?) {
+  return fetch.post(`/user/playlist?uid=${params.uid}`, {})
+}
+
+/**
+ * 
+ * @param data 
+ */
+function apilogincellphone(params: any) {
+  return fetch.post(`/login/cellphone?phone=${params.phone}&password=${params.password}`, {})
+}
 export {
-  login,
+  apilogincellphone,
   apipersonalizedMv,
   mvsetusl,
   videoGroup,
@@ -120,5 +132,6 @@ export {
   apisongurl,
   apimvdetails,
   apisimiMv,
-  apifirstMv
+  apifirstMv,
+  apiuserplayer
 }

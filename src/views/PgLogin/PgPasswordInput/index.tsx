@@ -1,28 +1,31 @@
 import React, { useEffect, useState} from 'react'
 // import { login } from '../../api/index.js'
-import useQuery from '../../../utils/useQuery'
+import query from '../../../utils/useQuery'
 import Headers from '../../../components/Headers'
-import { login } from '../../../api'
+import { apilogincellphone } from '../../../api'
 import './index.scss'
 function PgPasswordInput(props: any) {
     let [password, setpassword] = useState('')
     useEffect(() => {
         // console.log(useQuery())
     })
-    let { phone } = useQuery()
-    function toLogin(password) {
+    
+    function toLogin() {
+        let { phone } = query()
         
-        console.log(password, '去登陆')
         let params = {
             phone: phone,
             password: password
         }
-        if (!phone) {
-            login(params).then(res => {
-                console.log(res)
+        if (phone) {
+            // console.log(phone, '去登陆')
+            apilogincellphone(params).then(res => {
+                sessionStorage.setItem('useId', JSON.stringify(res.profile))
+                // console.log(res)
+                props.history.push('/index/fined')
             })
         }
-        props.history.push('/index/fined')
+        
     }
     return (
         <>
@@ -41,7 +44,7 @@ function PgPasswordInput(props: any) {
                     </div>
                 </div>
                 <div className="password-buttom" onClick={() => {
-                    toLogin(password)
+                    toLogin()
                 }}>
                     登陆
                 </div>
