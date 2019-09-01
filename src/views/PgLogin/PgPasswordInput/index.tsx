@@ -20,8 +20,7 @@ function PgPasswordInput(props: any) {
         if (phone) {
             // console.log(phone, '去登陆')
             apilogincellphone(params).then(res => {
-                sessionStorage.setItem('useId', JSON.stringify(res.profile))
-                // console.log(res)
+                sessionStorage.setItem('useMsg', JSON.stringify(res.profile))
                 props.history.push('/index/fined')
             })
         }

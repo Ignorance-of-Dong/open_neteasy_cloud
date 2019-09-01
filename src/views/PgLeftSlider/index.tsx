@@ -1,15 +1,20 @@
 import React from 'react'
 import { List, Badge } from 'antd-mobile'
 import { Icons } from '../../components'
-// import './index.scss'
+import './index.scss'
 function PgLeftSlider() {
+    let useMsg = sessionStorage.getItem('useMsg')
+    let useMsgs = JSON.parse(useMsg)
     return <List className='left-slider-wraps'>
         <div className="left-slider-topwrap">
             <div className="left-slider-anuter">
-                <img src="http://p1.music.126.net/0jS11D3OFnYBUpako_cLWA==/18547661650919676.jpg?param=140y140" alt="" />
+                <img src={useMsgs.avatarUrl} alt="" />
             </div>
+            <span className='left-silder-signature'>
+                {useMsgs.signature}
+            </span>
             <p className='left-silder-name'>
-                <span className='l-s-n-name'> 想上树的跳蚤 </span>
+                <span className='l-s-n-name'> {useMsgs.nickname} </span>
                 <span className='l-s-n-sign small'>签到</span>
             </p>
             <div className="left-slider-vip-wrap">
@@ -20,7 +25,7 @@ function PgLeftSlider() {
                 </div>
                 <div className="l-v-Advertisement small">
                     披萨免费吃一年
-                    </div>
+                </div>
             </div>
             <div className="left-slider-tab-bar">
                 <div className="l-s-t-b-coule">
@@ -57,7 +62,7 @@ function PgLeftSlider() {
                     </div>
                     <div className="l-s-d-l-right bigsmall">
                         萧金腾
-                        </div>
+                    </div>
                 </div>
                 <div className="l-s-d-list">
                     <div className="l-s-d-l-left">
@@ -66,7 +71,7 @@ function PgLeftSlider() {
                     </div>
                     <div className="l-s-d-l-right bigsmall">
                         皮卡丘伞39元
-                        </div>
+                    </div>
                 </div>
                 <div className="l-s-d-list">
                     <div className="l-s-d-l-left">

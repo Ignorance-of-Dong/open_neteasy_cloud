@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import {Headers, Toast} from '../../../components'
 import './index.scss'
 function PgPhoneInput(props: any) {
-    let [phone, setphone] = useState('17603446843')
+    let [phone, setphone] = useState('')
     useEffect(() => {
         console.log(1111, '=======')
     }, [])
