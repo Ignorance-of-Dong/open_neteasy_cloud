@@ -218,6 +218,8 @@ function PgMusicPlayer(props: any) {
      * @param id 歌曲id
      */
     function getsongurl(id) {
+        audiosRef.current.pause()
+        setstatePlay(false)
         let params = {
             id: id
         }
