@@ -13,7 +13,7 @@
     "babel-plugin-import": "^1.12.0",
     "gh-pages": "^2.1.1",
     "lyric-parser": "^1.0.1",
-    "node-sass": "^4.12.0",
+    "node-sass": "^7.0.0",
     "react": "^16.9.0",
     "react-app-rewire-hot-loader": "^2.0.1",
     "react-app-rewire-less": "^2.1.3",
